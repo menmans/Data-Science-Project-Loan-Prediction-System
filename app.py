@@ -1,16 +1,18 @@
-from flask import Flask, escape, request, render_template
+from flask import Flask, request, render_template
 import pickle
 import numpy as np
+
+# Your Flask application code continues here...
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("predication.html")
 
 
-@app.route('/predict', methods=['GET', 'POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     if request.method ==  'POST':
         gender = request.form['gender']
@@ -95,13 +97,13 @@ def predict():
             prediction="Yes"
 
 
-        return render_template("prediction.html", prediction_text="loan status is {}".format(prediction))
+        return render_template("Website Templates\predication.html", prediction_text="Loan status is {}".format(prediction))
 
 
 
 
     else:
-        return render_template("prediction.html")
+        return render_template("Website Templates\predication.htmll")
 
 
 
